@@ -5,6 +5,10 @@ body {
     background-color: #fff;
 }
 
+.container {
+    text-align: center;
+}
+
 .container-fluid{
     background-color: #d4ced1;
 

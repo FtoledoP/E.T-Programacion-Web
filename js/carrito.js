@@ -78,9 +78,11 @@ let arrayProductos = [
     }
 ]
 
-const insertar = document.querySelector(".containerProductos")
+function llenarMas(){
 
-arrayProductos.forEach(producto =>{
+    const insertar = document.querySelector(".containerProductos")
+
+    arrayProductos.forEach(producto =>{
     const div = document.createElement("div")
     div.className = "item"
     const span1 = document.createElement("span")
@@ -108,3 +110,129 @@ arrayProductos.forEach(producto =>{
 
     insertar.appendChild(div)
 })
+
+}
+
+function llenarIndex(){
+
+    const insertar = document.querySelector(".containerProductos")
+
+    arrayProductos.forEach(producto =>{
+
+        if (producto.idProducto === 7 || producto.idProducto === 8 || producto.idProducto === 9) {
+
+            const div = document.createElement("div")
+            div.className = "item"
+            const span1 = document.createElement("span")
+            span1.className = "idProducto"
+            span1.textContent = "SKU: ".concat(producto.idProducto)
+            const span2 = document.createElement("span")
+            span2.className = "tituloProducto"
+            span2.textContent = producto.tituloProducto
+            const img = document.createElement("img")
+            img.className = "imgProducto"
+            img.src = producto.imgProducto
+            const span3 = document.createElement("span")
+            span3.className = "precioProducto"
+            span3.textContent = producto.precioProducto
+            const btn = document.createElement("button")
+            btn.className = "btnProducto"
+            btn.textContent = "Agregar al Carrito"
+            btn.type = "button"
+
+            div.appendChild(span1)
+            div.appendChild(span2)
+            div.appendChild(img)
+            div.appendChild(span3)
+            div.appendChild(btn)
+
+            insertar.appendChild(div)
+        }
+
+    
+})
+
+}
+
+function llenarPerros(){
+
+    const insertar = document.querySelector(".containerProductos")
+
+    arrayProductos.forEach(producto =>{
+
+        if (producto.idProducto === 1 || producto.idProducto === 2 || producto.idProducto === 3) {
+
+            const div = document.createElement("div")
+            div.className = "item"
+            const span1 = document.createElement("span")
+            span1.className = "idProducto"
+            span1.textContent = "SKU: ".concat(producto.idProducto)
+            const span2 = document.createElement("span")
+            span2.className = "tituloProducto"
+            span2.textContent = producto.tituloProducto
+            const img = document.createElement("img")
+            img.className = "imgProducto"
+            img.src = producto.imgProducto
+            const span3 = document.createElement("span")
+            span3.className = "precioProducto"
+            span3.textContent = producto.precioProducto
+            const btn = document.createElement("button")
+            btn.className = "btnProducto"
+            btn.textContent = "Agregar al Carrito"
+            btn.type = "button"
+
+            div.appendChild(span1)
+            div.appendChild(span2)
+            div.appendChild(img)
+            div.appendChild(span3)
+            div.appendChild(btn)
+
+            insertar.appendChild(div)
+        }
+
+    
+})
+
+}
+
+function llenarGatos(){
+
+    const insertar = document.querySelector(".containerProductos")
+
+    arrayProductos.forEach(producto =>{
+
+        if (producto.idProducto === 4 || producto.idProducto === 5 || producto.idProducto === 6) {
+
+            const div = document.createElement("div")
+            div.className = "item"
+            const span1 = document.createElement("span")
+            span1.className = "idProducto"
+            span1.textContent = "SKU: ".concat(producto.idProducto)
+            const span2 = document.createElement("span")
+            span2.className = "tituloProducto"
+            span2.textContent = producto.tituloProducto
+            const img = document.createElement("img")
+            img.className = "imgProducto"
+            img.src = producto.imgProducto
+            const span3 = document.createElement("span")
+            span3.className = "precioProducto"
+            span3.textContent = producto.precioProducto
+            const btn = document.createElement("button")
+            btn.className = "btnProducto"
+            btn.textContent = "Agregar al Carrito"
+            btn.type = "button"
+
+            div.appendChild(span1)
+            div.appendChild(span2)
+            div.appendChild(img)
+            div.appendChild(span3)
+            div.appendChild(btn)
+
+            insertar.appendChild(div)
+        }
+
+    
+})
+
+}
+

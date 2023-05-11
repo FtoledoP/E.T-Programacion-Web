@@ -1,0 +1,21 @@
+.weather {
+    /* background-color: #333; */
+    padding:25px;
+    width:125px;
+    height: 150px;
+    text-align:left;
+    border-radius:5px;
+    position: relative;
+    margin-top: 1px;
+    font-size: 25px;
+}
+
+.temp .summary .location{
+    position: relative;
+    top: 10px;
+}
+
+.container {
+    position: relative;
+    top: -10px;
+}

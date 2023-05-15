@@ -1,0 +1,39 @@
+/* .clockdate-wrapper {
+    background-color: #333;
+    padding:25px;
+    width:375px;
+    height: 95px;
+    text-align:center;
+    border-radius:5px;
+
+} */
+#clock{
+    background-color:d4ced1;
+    font-family: sans-serif;
+    font-size:60px;
+    text-shadow:0px 0px 1px #fff;
+    color:#fff;
+}
+#clock span {
+    color:#888;
+    text-shadow:0px 0px 1px #333;
+    font-size:30px;
+    position:relative;
+    top:-10px;
+    left:-100px;
+}
+#date {
+    letter-spacing:10px;
+    font-size:14px;
+    font-family:arial,sans-serif;
+    color:#fff;
+}
+
+.reloj{
+    position: relative;
+}
+
+/* #clock{
+    position: relative;
+    top: -23px;
+} */

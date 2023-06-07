@@ -1,0 +1,97 @@
+{% extends "./base.html" %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/productos.css' %}">
+    <link rel="stylesheet" href="{% static 'css/carrito.css' %}">
+    <link rel="stylesheet" href="{% static 'css/stylesindex.css' %}">
+    <link rel="stylesheet" href="{% static 'css/stylereloj.css' %}">
+    <link rel="stylesheet" href="{% static 'css/darkmode.css' %}">
+    <link rel="stylesheet" href="{% static 'css/clima.css' %}">
+    <title>Inicio</title>
+{% endblock %}
+
+
+{% block body %}
+    <!-- CAROUSEL--------------------------------------------------------------------------------------------------------- -->
+
+    <div class="container mb-5 mt-5">
+        <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="{% static 'img/img1.png' %}" class="d-block w-100" alt="..." width="1000px" height="500px">
+                </div>
+                <div class="carousel-item">
+                    <img src="{% static 'img/img2.png' %}" class="d-block w-100" alt="..." width="500px" height="500px">
+                </div>
+                <div class="carousel-item">
+                    <img src="{% static 'img/img3.png' %}" class="d-block w-100" alt="..." width="500px" height="500px">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- PRODUCTOS--------------------------------------------------------------------------------------------------------- -->
+
+    <!-- <div class="container">
+        <div class="containerProductos">
+    
+        </div>
+    </div> -->
+    
+    <div class="container">
+        <div class="containerProductos">
+            <div class="item">
+                <span class="idProducto">SKU: 9</span>
+                <span class="tituloProducto">Arnes para Conejos</span> 
+                <img class="imgProducto" src="{% static 'img/img14.png' %}">
+                <span class="precioProducto">$55.990</span> 
+                <button class="btnProducto">Agregar al Carrito</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mb-5">
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar producto</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        ¿Seguro que quiere agregar este producto?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No agregar</button>
+                        <button onclick="productoAgregado()" type="button" class="btn btn-dark"
+                            data-bs-dismiss="modal">Agregar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block script %}
+    <script src="{% static 'js/productos.js' %}"></script>
+    <script src="{% static 'js/carrito.js' %}"></script>
+    <script src="{% static 'js/reloj.js' %}"></script>
+    <script src="{% static 'js/darkmode.js' %}"></script>
+    <script src="{% static 'js/clima.js' %}"></script>
+{% endblock %}

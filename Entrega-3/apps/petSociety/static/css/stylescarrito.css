@@ -1,0 +1,28 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background-color: #fff;
+}
+
+.container-fluid{
+    background-color: #d4ced1;
+
+}
+nav.navbar{
+    background-color: #d4ced1;
+
+} 
+.list-group{
+    background-color: #fff;
+
+} 
+
+.container{
+    align-items: center;
+}
+
+.imgCarro{
+    width:200px;
+    height:200px;
+}

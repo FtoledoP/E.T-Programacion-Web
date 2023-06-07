@@ -1,0 +1,75 @@
+/* ---------------------------------- CSS DEL METODO DE PRUEBA DE LOS PRODUCTOS ---------------------------------------- */
+
+.containerCarrito{
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-gap:30px;
+    grid-row-gap: 30px;
+    /* width: 60%; */
+    width: 100%;
+    transition: .3s;
+}
+
+.containerCarrito .item{
+    max-width: 300px;
+    height: 420px;
+    margin: auto;
+    border: 3px solid #a39b9f;
+    border-radius: 10px;
+    padding: 20px;
+    transition: .3s;
+}
+
+.containerCarrito .item .imgProducto{
+    width: 100%;
+}
+
+.containerCarrito .item:hover{
+    box-shadow: 0 0 10px #666;
+    scale: 1.05;
+}
+
+.containerCarrito .item .tituloProducto{
+    display: block;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.containerCarrito .item .precioProducto{
+    display: block;
+    text-align: center;
+    font-weight: bold;
+    font-size: 22px;
+}
+
+.containerCarrito .item .btnProducto{
+    margin: 10px auto;
+    text-align: center;
+    display: block;
+    border: none;
+    background-color: black;
+    color: #fff;
+    padding: 5px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.containerCarrito .item .idProducto{
+    display: block;
+    font-size: 10px;
+    font-weight: bolder;
+}
+
+#offcanvasExampleLabel{
+    font-weight: bold;
+    margin: 10px auto;
+    text-align: center;
+    display: block;
+    border: none;
+    background-color: black;
+    color: #fff;
+    padding: 5px 15px;
+    border-radius: 5px;
+}

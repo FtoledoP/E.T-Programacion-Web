@@ -2,20 +2,22 @@
 {% load static %}
 
 {% block head %}
-    <link rel="stylesheet" href="css/carrito.css">
-    <link rel="stylesheet" href="css/stylesperros.css">
-    <link rel="stylesheet" href="css/stylesindex.css">
-    <link rel="stylesheet" href="css/stylereloj.css">
-    <link rel="stylesheet" href="css/darkmode.css">
-    <link rel="stylesheet" href="css/clima.css">
+    <link rel="stylesheet" href="{% static 'css/carrito.css' %}">
+    <link rel="stylesheet" href="{% static 'css/productos.css' %}">
+    <link rel="stylesheet" href="{% static 'css/stylesgatos.css' %}">
+    <link rel="stylesheet" href="{% static 'css/stylesindex.css' %}">
+    <link rel="stylesheet" href="{% static 'css/stylereloj.css' %} ">
+    <link rel="stylesheet" href="{% static 'css/darkmode.css' %}">
+    <link rel="stylesheet" href="{% static 'css/clima.css' %}">
     <title>Perros</title>
 {% endblock %}
+
 
 {% block body %}
     <!-- IMAGEN CENTRAL--------------------------------------------------------------------------------------------------------- -->
         
     <div class="container mt-5">
-        <img src="img/img8.png" class="img-fluid" alt="" width="1500px"  height="500px" >
+        <img src="{% static 'img/img8.png' %}" class="img-fluid" alt="" width="1500px"  height="500px" >
     </div>
 
     <!-- PRODUCTOS--------------------------------------------------------------------------------------------------------- -->

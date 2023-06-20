@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import *
 import os
 from django.conf import settings
@@ -38,7 +38,7 @@ def agregarProductos(request):
 
     Producto.objects.create(sku = v_sku,nombre = v_nombre,stock = v_stock,precio = v_precio,descripcion = v_descripcion, id_categoria = v_categoria, imagen = v_img)        
 
-    return redirect('/agregarProducto')
+    return redirect('/agregarProductos')
     
 
 

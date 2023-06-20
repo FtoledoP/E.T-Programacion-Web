@@ -3,10 +3,11 @@ from . import views
 
 urlpatterns = [
     path('',views.cargarInicio),
-    path('perros',views.cargarPerros,name = 'perros'),
-    path('gatos',views.cargarGatos,name = 'gatos'),
-    path('mas',views.cargarMas,name = 'mas'),
-    path('inicio',views.cargarInicio,name = 'inicio')
+    path('perros',views.cargarPerros),
+    path('gatos',views.cargarGatos),
+    path('mas',views.cargarMas),
+    path('agregarProductos',views.cargarAgregarProductos),
+    path('agregarProductoForm',views.agregarProductos)
     
 ]
 

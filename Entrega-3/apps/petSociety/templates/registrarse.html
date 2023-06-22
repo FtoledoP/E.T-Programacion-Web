@@ -1,0 +1,85 @@
+{% extends "./base.html" %}
+{% load static %}
+
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/stylesindex.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/productos.css' %}">
+    <link rel="stylesheet" href="{% static 'css/carrito.css' %}">
+    <link rel="stylesheet" href="{% static 'css/stylesindex.css' %}">
+    <link rel="stylesheet" href="{% static 'css/stylereloj.css' %}">
+    <link rel="stylesheet" href="{% static 'css/darkmode.css' %}">
+    <link rel="stylesheet" href="{% static 'css/clima.css' %}">
+    <title>Registro</title>
+{% endblock %}
+
+{% block title %}
+  Registrar usuario
+{% endblock %}
+
+{% block body %}
+    <div class="login-box mt-5">
+        <h2>Registrarse</h2>
+        <form action="" id="formulario">
+            <div class="row">
+                <div class="col">
+                    <label for="txtNombre">Nombre</label>
+                    <input name="txtNombre" id="txtNombre" type="text" placeholder="Ingrese su nombre" class="form-control">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label for="txtApe">Apellido</label>
+                    <input name="txtApe" id="txtApe" type="text" placeholder="Ingrese su apellido" class="form-control">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label for="txtCorreo">Correo</label>
+                    <input name="txtCorreo" id="txtCorreo" type="text" placeholder="Ej: ejemplo@duocuc.cl"
+                        class="form-control">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-10">
+                    <label for="txtContra">Contraseña</label>
+                    <input name="txtContra" id="txtContra" type="password" placeholder="Ingrese su contraseña"
+                        class="form-control">
+                </div>
+                <div class="col-md-2">
+                    <button onclick="password()" class="btn btn-outline-secondary mt-4" type="button" id="button-addon2">
+                    
+                        <svg id="mostrar" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-eye-fill" viewBox="0 0 16 16">
+                            <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+                            <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
+                        </svg>
+                        <svg id="ocultar" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-eye-slash-fill" viewBox="0 0 16 16">
+                            <path
+                                d="m10.79 12.912-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7.029 7.029 0 0 0 2.79-.588zM5.21 3.088A7.028 7.028 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474L5.21 3.089z" />
+                            <path
+                                d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12-.708.708z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <button id="btnGuardar" class="btn btn-dark mt-3">Registrarse</button>
+            <label for="gracias" id="thx">Gracias por suscribirse</label>
+        </form>
+    </div>
+{% endblock %}
+
+
+{% block script %}
+    <script src="{% static 'js/formRegis.js' %}"></script>
+    <script src="{% static 'js/jquery-3.6.4.min.js' %}"></script>
+    <script src="{% static 'js/jquery.validate.min.js' %}"></script>
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/productos.js' %}"></script>
+    <script src="{% static 'js/carrito.js' %}"></script>
+    <script src="{% static 'js/reloj.js' %}"></script>
+    <script src="{% static 'js/darkmode.js' %}"></script>
+    <script src="{% static 'js/clima.js' %}"></script>
+{% endblock %}

@@ -12,12 +12,19 @@
     
  {% block head %}
  {% endblock %}
+
+ <title>
+    {% block title %}
+
+    {% endblock %}
+  </title>
+
 </head>
 
 
 
 <body onload="startTime()">
-    <nav class="navbar navbar-expand-lg bg">
+    <nav class="navbar navbar-expand-lg bg mb-5">
         <div class="container-fluid">
             <a class="navbar-brand" href="/">
                 <img src="{% static 'img/Logotipo.png' %}" alt="" width="35px" height="35px">PetSociety</a>
@@ -28,10 +35,10 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Inicio Sesion</a>
+                        <a class="nav-link active" aria-current="page" href="/login">Inicio Sesion</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Registrarse</a>
+                        <a class="nav-link" href="/registrarse">Registrarse</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
@@ -44,7 +51,7 @@
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="/mas">Más</a></li>
+                            <li><a class="dropdown-item" href="/mas">Otros</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -54,11 +61,6 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="/agregarProductos">Agregar producto</a></li>
-                            <li><a class="dropdown-item" href="editarProducto.html">Editar producto</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="listarProducto.html">Listar productos</a></li>
                         </ul>
                     </li>
                 </ul>

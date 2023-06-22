@@ -2,16 +2,17 @@
 {% load static %}
 
 {% block head %}
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="{% static 'css/productos.css' %}">
     <link rel="stylesheet" href="{% static 'css/carrito.css' %}">
     <link rel="stylesheet" href="{% static 'css/stylesindex.css' %}">
     <link rel="stylesheet" href="{% static 'css/stylereloj.css' %}">
     <link rel="stylesheet" href="{% static 'css/darkmode.css' %}">
     <link rel="stylesheet" href="{% static 'css/clima.css' %}">
-    <title>Inicio</title>
 {% endblock %}
 
+{% block title %}
+  Inicio
+{% endblock %}
 
 {% block body %}
     <!-- CAROUSEL--------------------------------------------------------------------------------------------------------- -->
@@ -44,24 +45,6 @@
 
     <!-- PRODUCTOS--------------------------------------------------------------------------------------------------------- -->
 
-    <!-- <div class="container">
-        <div class="containerProductos">
-    
-        </div>
-    </div> -->
-    
-    <div class="container">
-        <div class="containerProductos">
-            <div class="item">
-                <span class="idProducto">SKU: 9</span>
-                <span class="tituloProducto">Arnes para Conejos</span> 
-                <img class="imgProducto" src="{% static 'img/img14.png' %}">
-                <span class="precioProducto">$55.990</span> 
-                <button class="btnProducto">Agregar al Carrito</button>
-            </div>
-        </div>
-    </div>
-
     <div class="container mb-5">
 
 
@@ -86,38 +69,49 @@
         </div>
     </div>
 <!-- Se agregan los productos a la pantalla de inicio -->
+<!-- perros -->
     <div class="container">
-        <div class="row mt-5">
-            <h2>Perros</h2>
-            {% for p in cate_perros %}
-            <div class="col">
-                <div class="card" style="width: 18rem;">
-                    <img src="{{p.imagen.url}}" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">{{p.nombre}}</h5>
-                      <p class="card-text">{{p.descripcion}}</p>
-                      <a href="#" class="btn btn-primary">{{p.precio}}</a>
-                    </div>
-                  </div>
+        <h2>Perros</h2>
+        <div class="containerProductos">
+            <div class="row mt-5">
+                
+                {% for p in cate_perros %}
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <div class="card" style="width: 18rem;">
+                        <div class="item">
+                            <span class="idProducto">SKU: {{p.sku}}</span>
+                            <span class="tituloProducto">{{p.nombre}}</span>
+                            <img src="{{p.imagen.url}}" class="imgProducto" alt="...">
+                            <span class="precioProducto">${{p.precio}}</span>
+                            <span class="descProducto">{{p.descripcion}}</span>
+                            <button class="btnProducto">Agregar al Carrito</button>
+                        </div>
+                        </div>
+                </div>
+                {% endfor %}
             </div>
-            {% endfor %}
         </div>
 
-
-        <div class="row mt-5">
-            <h2>Gatos</h2>
-            {% for p in cate_gatos %}
-            <div class="col">
-                <div class="card" style="width: 18rem;">
-                    <img src="{{p.imagen.url}}" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">{{p.nombre}}</h5>
-                      <p class="card-text">{{p.descripcion}}</p>
-                      <a href="#" class="btn btn-primary">{{p.precio}}</a>
-                    </div>
-                  </div>
+<!-- gatos -->
+        <h2>Gatos</h2>
+        <div class="containerProductos">
+            <div class="row mt-5">
+                
+                {% for p in cate_gatos %}
+                <div class="col">
+                    <div class="card" style="width: 18rem;">
+                        <div class="item">
+                            <span class="idProducto">SKU: {{p.sku}}</span>
+                            <span class="tituloProducto">{{p.nombre}}</span>
+                            <img src="{{p.imagen.url}}" class="imgProducto" alt="...">
+                            <span class="precioProducto">${{p.precio}}</span>
+                            <span class="descProducto">{{p.descripcion}}</span>
+                            <button class="btnProducto">Agregar al Carrito</button>
+                        </div>
+                        </div>
+                </div>
+                {% endfor %}
             </div>
-            {% endfor %}
         </div>
     </div>
     

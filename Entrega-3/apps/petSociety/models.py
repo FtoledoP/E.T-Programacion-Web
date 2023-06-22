@@ -21,3 +21,11 @@ class Producto(models.Model):
     def __str__(self):
         txt = "N° {0} - Stock: {1} - nombre: {2}"
         return txt.format(self.sku,self.stock, self.nombre)
+    
+
+class Usuario(models.Model):
+    correo = models.CharField(max_length=50, primary_key=True)
+    nombre = models.CharField(max_length=50)
+    apellido = models.CharField(max_length=50)
+    password = models.CharField(max_length=50)
+

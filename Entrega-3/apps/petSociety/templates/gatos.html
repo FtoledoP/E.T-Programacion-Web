@@ -9,15 +9,16 @@
     <link rel="stylesheet" href="{% static 'css/stylereloj.css' %} ">
     <link rel="stylesheet" href="{% static 'css/darkmode.css' %}">
     <link rel="stylesheet" href="{% static 'css/clima.css' %}">
-    <title>Gatos</title>
 {% endblock %}
 
+{% block title %}
+  Gatos
+{% endblock %}
 
 {% block body %}
     <!-- IMAGEN CENTRAL--------------------------------------------------------------------------------------------------------- -->
-    <div class="container mt-5">
-        <img src="{%static 'img/img9.png' %}" class="img-fluid" alt="" width="1500px"  height="500px" >
-    </div>
+
+        <img src="{%static 'img/img9.png' %}" class="img-fluid" alt="" width="100%"  height="100%" >
         
 
 
@@ -25,7 +26,23 @@
 
     <div class="container">
         <div class="containerProductos">
-            
+            <div class="row mt-5">
+                <h2>Gatos</h2>
+                {% for p in cate_gatos %}
+                <div class="col">
+                    <div class="card" style="width: 18rem;">
+                        <div class="item">
+                            <span class="idProducto">SKU: {{p.sku}}</span>
+                            <span class="tituloProducto">{{p.nombre}}</span>
+                            <img src="{{p.imagen.url}}" class="imgProducto" alt="...">
+                            <span class="precioProducto">${{p.precio}}</span>
+                            <span class="descProducto">{{p.descripcion}}</span>
+                            <button class="btnProducto">Agregar al Carrito</button>
+                        </div>
+                        </div>
+                </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
 

@@ -3,10 +3,6 @@
 
 {% load static %}
 
-{% block title %}
-  Agregar productos
-{% endblock %}
-
 {% block head %}
     <link rel="stylesheet" href="{% static 'css/carrito.css' %}">
     <link rel="stylesheet" href="{% static 'css/productos.css' %}">
@@ -18,35 +14,36 @@
     <title>Agregar Productos</title>
 {% endblock %}
 
+{% block title %}
+  Editar productos
+{% endblock %}
+
 {% block body %}
-<div class="container mb-5">
-    <h1>Agregar productos</h1>
-</div>
-    
+    <h1>Editar productos</h1>
 
 
     <div class="container">
-        <form id="agregarProductoForm" action="/agregarProductoForm" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+        <form action="/editarProductosForm" method="POST" enctype="multipart/form-data"> {% csrf_token %}
             <div class="row">
                 <div class="col-md-4">
                     <label for="txtSku">SKU:</label>
-                    <input name="txtSku" id="txtSku" type="text" class="form-control">
+                    <input readonly value="{{prod.sku}}" name="txtSku" id="txtSku" type="text" class="form-control">
                 </div>
 
                 <div class="col-md-8">
                     <label for="txtNombre">Nombre:</label>
-                    <input name="txtNombre" id="txtNombre" type="text" class="form-control">
+                    <input value="{{prod.nombre}}" name="txtNombre" id="txtNombre" type="text" class="form-control">
                 </div>
 
                 <div class="col-md-4">
                     <label for="txtStock">Stock:</label>
-                    <input name="txtStock" id="txtStock" type="text" class="form-control">
+                    <input value="{{prod.stock}}" name="txtStock" id="txtStock" type="text" class="form-control">
                 </div>
 
 
                 <div class="col-md-4">
                     <label for="txtPrecio">Precio:</label>
-                    <input name="txtPrecio" id="txtPrecio" type="text" class="form-control">
+                    <input value="{{prod.precio}}" name="txtPrecio" id="txtPrecio" type="text" class="form-control">
                 </div>
 
                 <div class="col-md-4">
@@ -54,58 +51,26 @@
                     <select name="cmbCategoria" id="cmbCategoria" class="form-select" aria-label="Default select example">
                         <option disabled selected>Seleccione</option>
                         {% for c in cate %}
-                        <option value="{{c.id_categoria}}">{{c.nombre_categoria}}</option>
+                        <option value="{{c.id_categoria}}" {% if c.id_categoria == prod.id_categoria.id_categoria %} selected {% endif %} >{{c.nombre_categoria}}</option>
                         {% endfor %}
-                      </select>
+                    </select>
                 </div>
 
                 <div class="col-md-12">
                     <label for="txtDescripcion">Descripción:</label>
-                    <input name="txtDescripcion" id="txtDescripcion" type="text" class="form-control">
+                    <input value="{{prod.descripcion}}" name="txtDescripcion" id="txtDescripcion" type="text" class="form-control">
                 </div>
 
                 <div class="col-md-12">
                     <label for="txtImg">Imagen:</label>
+                    <img src="{{prod.imagen.url}}" height="100" alt="">
                     <input name="txtImg" id="txtImg" type="file" class="form-control">
                 </div>
 
                 
             </div>
-            <button class="btn btn-dark mt-5 w-100">Agregar producto</button>
+            <button class="btn btn-dark mt-5 w-100">Editar producto</button>
         </form>
-    </div>
-
-
-    <div class="container mt-5">
-        <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">sku</th>
-                <th scope="col">Imagen</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Stock</th>
-                <th scope="col">Precio</th>
-                <th scope="col">Descripción</th>
-                <th scope="col">Categoria</th>
-                <th scope="col">Opciones</th>
-              </tr>
-            </thead>
-            <tbody>
-                {% for p in prod %}
-              <tr>
-                <th scope="row">{{p.sku}}</th>
-                <td><img src="{{p.imagen.url}}" alt="" height="100"></td>
-                <td>{{p.nombre}}</td>
-                <td>{{p.stock}}</td>
-                <td>{{p.precio}}</td>
-                <td>{{p.descripcion}}</td>
-                <td>{{p.id_categoria}}</td>
-                <td><a href="/editarProductos/{{p.sku}}" class="btn btn-primary">Editar</a></td>
-                <td><a href="/eliminarProductos/{{p.sku}}" class="btn btn-danger">Eliminar</a></td>
-              </tr>
-              {% endfor %} 
-            </tbody>
-          </table>
     </div>
 {% endblock %}
 

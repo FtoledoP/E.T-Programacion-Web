@@ -29,3 +29,7 @@ class Usuario(models.Model):
     apellido = models.CharField(max_length=50)
     password = models.CharField(max_length=50)
 
+    def __str__(self):
+        txt = "Nombre: {1} - Correo: {0}"
+        return txt.format(self.correo,self.nombre)
+

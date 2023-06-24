@@ -10,6 +10,7 @@ urlpatterns = [
     path('agregarProductoForm',views.agregarProductos),
     path('login', views.cargarLogin),
     path('registrarse', views.cargarRegistrarse),
+    path('agregarUsuarioForm', views.agregarUsuario),
     path('editarProductos/<sku>',views.cargarEditarProductos),
     path('editarProductosForm',views.editarProductos),
     path('eliminarProductos/<sku>',views.eliminarProductos)

@@ -37,26 +37,22 @@ def cargarAgregarProductos(request):
 
 
 def agregarProductos(request):
-    # Obtener el SKU ingresado en el formulario
-    v_sku = request.POST['txtSku']
-    
-    # Verificar si ya existe un producto con el mismo SKU en la base de datos
-    if Producto.objects.filter(sku=v_sku).exists():
-        messages.error(request, 'El SKU ingresado ya existe. Por favor, elija un SKU diferente.')
-        return redirect('/agregarProductos')
-    
-    # Resto del código para guardar el producto en la base de datos
-    v_nombre = request.POST['txtNombre']
-    v_stock = request.POST['txtStock']
-    v_precio = request.POST['txtPrecio']
-    v_descripcion = request.POST['txtDescripcion']
-    v_img = request.FILES['txtImg']
-    v_categoria = Categoria.objects.get(id_categoria=request.POST['cmbCategoria'])
+     # Obtener el SKU ingresado en el formulario
+     v_sku = request.POST['txtSku']
 
-    Producto.objects.create(sku=v_sku, nombre=v_nombre, stock=v_stock, precio=v_precio, descripcion=v_descripcion,
-                            id_categoria=v_categoria, imagen=v_img)
+     # Resto del código para guardar el producto en la base de datos
+     v_nombre = request.POST['txtNombre']
+     v_stock = request.POST['txtStock']
+     v_precio = request.POST['txtPrecio']
+     v_descripcion = request.POST['txtDescripcion']
+     v_img = request.FILES['txtImg']
+     v_categoria = Categoria.objects.get(id_categoria=request.POST['cmbCategoria'])
 
-    return redirect('/agregarProductos')
+     Producto.objects.create(sku=v_sku, nombre=v_nombre, stock=v_stock, precio=v_precio, descripcion=v_descripcion,
+                              id_categoria=v_categoria, imagen=v_img)
+
+     return redirect('/agregarProductos')
+
 
 
 def cargarLogin(request):

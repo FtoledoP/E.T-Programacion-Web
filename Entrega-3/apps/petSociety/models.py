@@ -6,7 +6,7 @@ class Categoria(models.Model):
 
     def __str__(self):
         txt = "Nombre: {0} - Id: {1}"
-        return txt.format(self.nombre_categoria,self.id_categoria)
+        return txt.format(self.nombre_categoria, self.id_categoria)
 
 
 class Producto(models.Model):
@@ -15,13 +15,12 @@ class Producto(models.Model):
     stock = models.IntegerField()
     precio = models.IntegerField()
     descripcion = models.CharField(max_length=200)
-    id_categoria = models.ForeignKey(Categoria,on_delete=models.CASCADE)
+    id_categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
     imagen = models.ImageField(upload_to='imagenProducto')
 
     def __str__(self):
-        txt = "N° {0} - Stock: {1} - nombre: {2}"
-        return txt.format(self.sku,self.stock, self.nombre)
-    
+        txt = "N° {0} - Stock: {1} - Nombre: {2}"
+        return txt.format(self.sku, self.stock, self.nombre)
 
 class Usuario(models.Model):
     correo = models.CharField(max_length=50, primary_key=True)
@@ -31,5 +30,4 @@ class Usuario(models.Model):
 
     def __str__(self):
         txt = "Nombre: {1} - Correo: {0}"
-        return txt.format(self.correo,self.nombre)
-
+        return txt.format(self.correo, self.nombre)

@@ -8,32 +8,41 @@ from django.core.exceptions import ValidationError
 # Create your views here.
 
 def cargarInicio(request):
+     tipoUsuario = request.session.get('tipoUsuario', None)
+     print(tipoUsuario)
      productos = Producto.objects.all()
      categoria_perros = Producto.objects.filter(id_categoria = 1)
      categoria_gatos = Producto.objects.filter(id_categoria = 2)
-     return render(request,"index.html",{"prod":productos,"cate_gatos":categoria_gatos,"cate_perros":categoria_perros})
+     return render(request,"index.html",{"prod":productos,"cate_gatos":categoria_gatos,"cate_perros":categoria_perros,"tipoUsuario":tipoUsuario})
 
 
 def cargarPerros(request):
+     tipoUsuario = request.session.get('tipoUsuario', None)
+     print(tipoUsuario)
      productos = Producto.objects.all()
      categoria_perros = Producto.objects.filter(id_categoria = 1)
-     return render(request,"perros.html",{"prod":productos,"cate_perros":categoria_perros})
+     return render(request,"perros.html",{"prod":productos,"cate_perros":categoria_perros,"tipoUsuario":tipoUsuario})
 
 def cargarGatos(request):
+     tipoUsuario = request.session.get('tipoUsuario', None)
+     print(tipoUsuario)
      productos = Producto.objects.all()
      categoria_gatos = Producto.objects.filter(id_categoria = 2)
-     return render(request,"gatos.html",{"prod":productos,"cate_gatos":categoria_gatos})
+     return render(request,"gatos.html",{"prod":productos,"cate_gatos":categoria_gatos,"tipoUsuario":tipoUsuario})
 
 def cargarMas(request):
+     tipoUsuario = request.session.get('tipoUsuario', None)
+     print(tipoUsuario)
      productos = Producto.objects.all()
      categoria_otros = Producto.objects.filter(id_categoria = 3)
-     return render(request,"mas.html",{"prod":productos, "cate_otros":categoria_otros})
+     return render(request,"mas.html",{"prod":productos, "cate_otros":categoria_otros,"tipoUsuario":tipoUsuario})
 
 def cargarAgregarProductos(request):
+     tipoUsuario = request.session.get('tipoUsuario', None)
+     print(tipoUsuario)
      categorias = Categoria.objects.all()
      productos = Producto.objects.all()
-     return render(request,"agregarProductos.html",{"cate":categorias, "prod":productos})
-
+     return render(request,"agregarProductos.html",{"cate":categorias, "prod":productos,"tipoUsuario":tipoUsuario})
 
 def agregarProductos(request):
      v_sku = request.POST['txtSku']
@@ -53,16 +62,22 @@ def agregarProductos(request):
 
 
 def cargarLogin(request):
-     return render(request,"login.html")
+     tipoUsuario = request.session.get('tipoUsuario', None)
+     print(tipoUsuario)
+     return render(request,"login.html",{"tipoUsuario":tipoUsuario})
 
-def cargarRegistrarse(request, login):
+def cargarRegistrarse(request):
+     tipoUsuario = request.session.get('tipoUsuario', None)
+     print(tipoUsuario)
      tipoUser = TipoUsuario.objects.all()
-     return render(request,"registrarse.html",{"tipo":tipoUser,"login":login})
+     return render(request,"registrarse.html",{"tipo":tipoUser,"tipoUsuario":tipoUsuario})
 
 def cargarEditarProductos(request,sku):
+     tipoUsuario = request.session.get('tipoUsuario', None)
+     print(tipoUsuario)
      productos = Producto.objects.get(sku = sku)
      categorias = Categoria.objects.all()
-     return render(request,"editarProductos.html",{"prod":productos,"cate":categorias})
+     return render(request,"editarProductos.html",{"prod":productos,"cate":categorias,"tipoUsuario":tipoUsuario})
 
 def editarProductos(request):
      v_sku = request.POST['txtSku']
@@ -100,7 +115,7 @@ def eliminarProductos(request,sku):
      producto.delete()
      return redirect('/agregarProductos')
 
-def agregarUsuario(request, login):
+def agregarUsuario(request):
 
      v_correo = request.POST["txtCorreo"]
      v_nombre = request.POST['txtNombre']
@@ -115,6 +130,26 @@ def agregarUsuario(request, login):
      return redirect('/')
 
 def iniciarSesion(request):
+     if request.method == 'POST':
+          correo = request.POST.get('txtCorreo')
+          contrasena = request.POST.get('txtContra')
 
-     return redirect('/')
-
+          usuarios = Usuario.objects.filter(correo=correo)
+          if usuarios.exists():
+               usuario = usuarios.first()
+               if usuario.password == contrasena:
+                    # Las credenciales son correctas, puedes iniciar sesión
+                    request.session['tipoUsuario'] = usuario.id_tipo.nombre_tipo
+                    return redirect('/')  # Redirige a la página de inicio o a la que desees
+               else:
+                    # La contraseña es incorrecta
+                    mensaje = 'Contraseña incorrecta'
+                    return render(request, 'login.html', {'mensaje': mensaje, 'correo': correo})
+          else:
+               # El correo no está registrado en el sistema
+               mensaje = 'El correo no está registrado'
+               return render(request, 'login.html', {'mensaje': mensaje, 'correo': correo})
+          
+def cerrarSesion(request):
+    request.session['tipoUsuario'] = None
+    return redirect('/login')

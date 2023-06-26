@@ -30,6 +30,7 @@ formulario.addEventListener('submit', function(evento){
                 listaTemporal.forEach(usuario => {
                     console.log(usuario);
                     if (!(usuario.correo == correo)) {
+                        
                     } else {
                         const toastCorreo = bootstrap.Toast.getOrCreateInstance(toastErrorCorreo)
                         toastCorreo.show()

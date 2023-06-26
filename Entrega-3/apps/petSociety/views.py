@@ -36,10 +36,8 @@ def cargarAgregarProductos(request):
 
 
 def agregarProductos(request):
-     # Obtener el SKU ingresado en el formulario
      v_sku = request.POST['txtSku']
 
-     # Resto del código para guardar el producto en la base de datos
      v_nombre = request.POST['txtNombre']
      v_stock = request.POST['txtStock']
      v_precio = request.POST['txtPrecio']
@@ -57,52 +55,52 @@ def agregarProductos(request):
 def cargarLogin(request):
      return render(request,"login.html")
 
-def cargarRegistrarse(request):
+def cargarRegistrarse(request, login):
      tipoUser = TipoUsuario.objects.all()
-     return render(request,"registrarse.html",{"tipo":tipoUser})
+     return render(request,"registrarse.html",{"tipo":tipoUser,"login":login})
 
 def cargarEditarProductos(request,sku):
-    productos = Producto.objects.get(sku = sku)
-    categorias = Categoria.objects.all()
-    return render(request,"editarProductos.html",{"prod":productos,"cate":categorias})
+     productos = Producto.objects.get(sku = sku)
+     categorias = Categoria.objects.all()
+     return render(request,"editarProductos.html",{"prod":productos,"cate":categorias})
 
 def editarProductos(request):
-    v_sku = request.POST['txtSku']
-    productoBD = Producto.objects.get(sku = v_sku)
-    v_nombre = request.POST['txtNombre']
-    v_stock = request.POST['txtStock']
-    v_precio = request.POST['txtPrecio']
-    v_descripcion = request.POST['txtDescripcion']
-    v_categoria = Categoria.objects.get(id_categoria = request.POST['cmbCategoria'])
+     v_sku = request.POST['txtSku']
+     productoBD = Producto.objects.get(sku = v_sku)
+     v_nombre = request.POST['txtNombre']
+     v_stock = request.POST['txtStock']
+     v_precio = request.POST['txtPrecio']
+     v_descripcion = request.POST['txtDescripcion']
+     v_categoria = Categoria.objects.get(id_categoria = request.POST['cmbCategoria'])
 
-    try:
-        v_img = request.FILES['txtImg']
-        ruta_imagen = os.path.join(settings.MEDIA_ROOT, str(productoBD.imagen))
-        os.remove(ruta_imagen)
-    except:
-        v_img = productoBD.imagen
-
-
-    productoBD.nombre = v_nombre
-    productoBD.stock = v_stock
-    productoBD.precio = v_precio
-    productoBD.descripcion = v_descripcion
-    productoBD.imagen = v_img
-    productoBD.id_categoria = v_categoria
-
-    productoBD.save()
+     try:
+          v_img = request.FILES['txtImg']
+          ruta_imagen = os.path.join(settings.MEDIA_ROOT, str(productoBD.imagen))
+          os.remove(ruta_imagen)
+     except:
+          v_img = productoBD.imagen
 
 
-    return redirect('/agregarProductos')
+     productoBD.nombre = v_nombre
+     productoBD.stock = v_stock
+     productoBD.precio = v_precio
+     productoBD.descripcion = v_descripcion
+     productoBD.imagen = v_img
+     productoBD.id_categoria = v_categoria
+
+     productoBD.save()
+
+
+     return redirect('/agregarProductos')
 
 def eliminarProductos(request,sku):
-    producto = Producto.objects.get(sku = sku)
-    ruta_imagen = os.path.join(settings.MEDIA_ROOT, str(producto.imagen))
-    os.remove(ruta_imagen)
-    producto.delete()
-    return redirect('/agregarProductos')
+     producto = Producto.objects.get(sku = sku)
+     ruta_imagen = os.path.join(settings.MEDIA_ROOT, str(producto.imagen))
+     os.remove(ruta_imagen)
+     producto.delete()
+     return redirect('/agregarProductos')
 
-def agregarUsuario(request):
+def agregarUsuario(request, login):
 
      v_correo = request.POST["txtCorreo"]
      v_nombre = request.POST['txtNombre']

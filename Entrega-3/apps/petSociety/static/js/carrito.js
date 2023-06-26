@@ -1,259 +1,81 @@
+const toastErrorCarrito = document.getElementById('toastError');
+// Obtener referencia al botón "Agregar al Carrito"
+var agregarBotones = document.querySelectorAll('.btnProducto');
 
-var itemsCarrito = JSON.parse(localStorage.getItem("carrito")) || [];
+// Agregar un evento de clic a cada botón
+agregarBotones.forEach(function(boton) {
+  boton.addEventListener('click', function() {
+    // Obtener información del producto
+    var item = this.parentNode;
+    var id = item.querySelector('.idProducto').innerText;
+    var titulo = item.querySelector('.tituloProducto').innerText;
+    var imgSrc = item.querySelector('.imgProducto').src;
+    var precio = item.querySelector('.precioProducto').innerText;
 
-function llenarMas() {
-    const insertar = document.querySelector(".containerProductos")
+    // Crear objeto de producto
+    var producto = {
+      id: id,
+      titulo: titulo,
+      imgSrc: imgSrc,
+      precio: precio
+    };
 
-    listaProductos.forEach(producto => {
-        let contenido = document.createElement("div")
-        contenido.className = "item"
-        contenido.innerHTML = `
-        <span class="idProducto">SKU: ${producto.idProducto}</span>
-        <span class="tituloProducto">${producto.tituloProducto}</span> 
-        <img class="imgProducto" src="${producto.imgProducto}">
-        <span class="precioProducto">${producto.precioProducto}</span> 
-        `
-        insertar.append(contenido)
-
-        //Boton para agregar a la lista de carrito
-
-        let agregar = document.createElement("button")
-        agregar.innerText = "Agregar al Carrito"
-        agregar.className = "btnProducto"
-
-        contenido.append(agregar)
-
-        //Se agrega a la lista de carrito
-
-        agregar.addEventListener("click", function () {
-            const existe = itemsCarrito.some((item) => item.id === producto.idProducto);
-            if (existe) {
-                window.alert("El producto ya está en el carrito");
-            } else {
-                itemsCarrito.push({
-                    id: producto.idProducto,
-                    nombre: producto.tituloProducto,
-                    img: producto.imgProducto,
-                    precio: producto.precioProducto
-                })
-                const obj = JSON.stringify(itemsCarrito);
-                console.log(obj);
-                localStorage.setItem("carrito", obj);
-                console.log("Storage creado");
-                window.alert("Producto agregado correctamente")
-                actualizarCarrito()
-            }
-        })
-        
-    })
-}
-
-function llenarIndex() {
-    console.log(itemsCarrito);
-
-    const insertar = document.querySelector(".containerProductos")
-
-    listaProductos.forEach(producto => {
-
-        if (producto.idProducto === 7 || producto.idProducto === 8 || producto.idProducto === 9) {
-
-            let contenido = document.createElement("div")
-            contenido.className = "item"
-            contenido.innerHTML = `
-            <span class="idProducto">SKU: ${producto.idProducto}</span>
-            <span class="tituloProducto">${producto.tituloProducto}</span> 
-            <img class="imgProducto" src="${producto.imgProducto}">
-            <span class="precioProducto">${producto.precioProducto}</span> 
-            `
-
-            insertar.appendChild(contenido)
-
-            //Boton para agregar a la lista de carrito
-
-            let agregar = document.createElement("button")
-            agregar.innerText = "Agregar al Carrito"
-            agregar.className = "btnProducto"
-
-            contenido.append(agregar)
-
-            //Se agrega a la lista de carrito
-
-            agregar.addEventListener("click", function () {
-                const existe = itemsCarrito.some((item) => item.id === producto.idProducto);
+    // Obtener el carrito del localStorage o crear uno vacío
+    var carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    const existe = carrito.some((item) => item.id === producto.idProducto);
                 if (existe) {
-                    window.alert("El producto ya está en el carrito");
+                    const toastErrorCarrito = bootstrap.Toast.getOrCreateInstance(toastErrorCarrito)
+                    toastErrorCarrito.show()
                 } else {
-                    itemsCarrito.push({
-                        id: producto.idProducto,
-                        nombre: producto.tituloProducto,
-                        img: producto.imgProducto,
-                        precio: producto.precioProducto
-                    })
-                    const obj = JSON.stringify(itemsCarrito);
-                    console.log(obj);
-                    localStorage.setItem("carrito", obj);
-                    console.log("Storage creado");
-                    window.alert("Producto agregado correctamente")
-                    actualizarCarrito()
+                    
+
+                    // Agregar el producto al carrito
+                    carrito.push(producto);
+
+                    // Guardar el carrito actualizado en el localStorage
+                    localStorage.setItem('carrito', JSON.stringify(carrito));
+
+
+                    // Actualizar visualmente el carrito
+                    actualizarCarrito();
                 }
-            })
-        }
+  });
+});
 
-
-    })
-
-}
-
-function llenarPerros() {
-
-    const insertar = document.querySelector(".containerProductos")
-
-    listaProductos.forEach(producto => {
-
-        if (producto.idProducto === 1 || producto.idProducto === 2 || producto.idProducto === 3) {
-
-            let contenido = document.createElement("div")
-            contenido.className = "item"
-            contenido.innerHTML = `
-            <span class="idProducto">SKU: ${producto.idProducto}</span>
-            <span class="tituloProducto">${producto.tituloProducto}</span> 
-            <img class="imgProducto" src="${producto.imgProducto}">
-            <span class="precioProducto">${producto.precioProducto}</span> 
-            `
-
-            insertar.appendChild(contenido)
-
-            //Boton para agregar a la lista de carrito
-
-            let agregar = document.createElement("button")
-            agregar.innerText = "Agregar al Carrito"
-            agregar.className = "btnProducto"
-
-            contenido.append(agregar)
-
-            //Se agrega a la lista de carrito
-
-            agregar.addEventListener("click", function () {
-                const existe = itemsCarrito.some((item) => item.id === producto.idProducto);
-                if (existe) {
-                    window.alert("El producto ya está en el carrito");
-                } else {
-                    itemsCarrito.push({
-                        id: producto.idProducto,
-                        nombre: producto.tituloProducto,
-                        img: producto.imgProducto,
-                        precio: producto.precioProducto
-                    })
-                    const obj = JSON.stringify(itemsCarrito);
-                    console.log(obj);
-                    localStorage.setItem("carrito", obj);
-                    console.log("Storage creado");
-                    window.alert("Producto agregado correctamente")
-                    actualizarCarrito()
-                }
-            })
-        }
-
-
-    })
-
-}
-
-function llenarGatos() {
-
-    const insertar = document.querySelector(".containerProductos")
-
-    listaProductos.forEach(producto => {
-
-        if (producto.idProducto === 4 || producto.idProducto === 5 || producto.idProducto === 6) {
-
-            let contenido = document.createElement("div")
-            contenido.className = "item"
-            contenido.innerHTML = `
-            <span class="idProducto">SKU: ${producto.idProducto}</span>
-            <span class="tituloProducto">${producto.tituloProducto}</span> 
-            <img class="imgProducto" src="${producto.imgProducto}">
-            <span class="precioProducto">${producto.precioProducto}</span> 
-            `
-
-            insertar.appendChild(contenido)
-
-            //Boton para agregar a la lista de carrito
-
-            let agregar = document.createElement("button")
-            agregar.innerText = "Agregar al Carrito"
-            agregar.className = "btnProducto"
-
-            contenido.append(agregar)
-
-            //Se agrega a la lista de carrito
-
-            agregar.addEventListener("click", function () {
-                const existe = itemsCarrito.some((item) => item.id === producto.idProducto);
-                if (existe) {
-                    window.alert("El producto ya está en el carrito");
-                } else {
-                    itemsCarrito.push({
-                        id: producto.idProducto,
-                        nombre: producto.tituloProducto,
-                        img: producto.imgProducto,
-                        precio: producto.precioProducto
-                    })
-                    const obj = JSON.stringify(itemsCarrito);
-                    console.log(obj);
-                    localStorage.setItem("carrito", obj);
-                    console.log("Storage creado");
-                    window.alert("Producto agregado correctamente")
-                    actualizarCarrito()
-                }
-            })
-        }
-
-
-    })
-
-}
-
+// Función para actualizar visualmente el carrito
 function actualizarCarrito() {
+  var carrito = JSON.parse(localStorage.getItem('carrito')) || [];
 
-    const storage = localStorage.getItem("carrito");
-    const obj = JSON.parse(storage);
+  var insertar = document.querySelector('.containerCarrito');
+  insertar.innerHTML = '';
 
-    const insertar = document.querySelector(".containerCarrito")
+  carrito.forEach(function(producto) {
+    var contenido = document.createElement('div');
+    contenido.className = 'item';
+    contenido.innerHTML = `
+      <span class="idProducto"> ${producto.id}</span>
+      <span class="tituloProducto">${producto.titulo}</span>
+      <img class="imgProducto" src="${producto.imgSrc}">
+      <span class="precioProducto">${producto.precio}</span>
+      `;
+    insertar.append(contenido);
+    //Boton para eliminar del carrito
 
-    insertar.innerHTML = ``
+    let eliminar = document.createElement("button")
+    eliminar.innerText = "Eliminar ❌"
+    eliminar.className = "btnProducto"
 
-    obj.forEach(producto => {
+    contenido.append(eliminar)
 
-        let contenido = document.createElement("div")
-        contenido.className = "item"
-        contenido.innerHTML = `
-        <span class="idProducto">SKU: ${producto.id}</span>
-        <span class="tituloProducto">${producto.nombre}</span> 
-        <img class="imgProducto" src="${producto.img}">
-        <span class="precioProducto">${producto.precio}</span> 
-        `
-
-        insertar.append(contenido)
-
-        //Boton para eliminar del carrito
-
-        let eliminar = document.createElement("button")
-        eliminar.innerText = "Eliminar ❌"
-        eliminar.className = "btnProducto"
-
-        contenido.append(eliminar)
-
-        eliminar.addEventListener("click", function() {
-            eliminarItem(producto.id);
-        });
-        
-    })
+    eliminar.addEventListener("click", function() {
+        eliminarItem(producto.id);
+    });
+  });
 }
 
 function eliminarItem(id){
-
-    itemsCarrito.splice(itemsCarrito.findIndex(car => car.id === id), 1)
+    var carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    carrito.splice(carrito.findIndex(car => car.id === id), 1)
 
     let valor = id;
     let obj = JSON.parse(localStorage.getItem("carrito"));
@@ -266,9 +88,10 @@ function eliminarItem(id){
         }
     }
     localStorage.setItem("carrito", JSON.stringify(arrayTemporal));
-    window.alert("Producto eliminado correctamente")
     actualizarCarrito()
-    console.log(itemsCarrito);
+    console.log(carrito);
 }
 
-//----------------------------------------------------------------- LOCAL STORAGE -----------------------------------------------------------------------
+
+
+

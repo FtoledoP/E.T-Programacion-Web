@@ -153,3 +153,6 @@ def iniciarSesion(request):
 def cerrarSesion(request):
     request.session['tipoUsuario'] = None
     return redirect('/login')
+
+
+

@@ -13,7 +13,8 @@ urlpatterns = [
     path('agregarUsuarioForm', views.agregarUsuario),
     path('editarProductos/<sku>',views.cargarEditarProductos),
     path('editarProductosForm',views.editarProductos),
-    path('eliminarProductos/<sku>',views.eliminarProductos)
+    path('eliminarProductos/<sku>',views.eliminarProductos),
+    path('iniciarSesionForm',views.iniciarSesion)
 ]
 
 

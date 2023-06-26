@@ -19,26 +19,24 @@
 {% block body %}
 
     <div class="container">
-        <form id="agregarUsuarioForm" action="/agregarUsuarioForm" method="POST" enctype="multipart/form-data"> {% csrf_token %}
-
+        <form id="iniciarSesionForm" action="/iniciarSesionForm" method="POST" enctype="multipart/form-data"> {% csrf_token %}
             <div class="login-box mt-5">
-
                 <h2>Inicio de sesión</h2>
                 <!-- -------------------------------------------------------------------------- ROW ---------------------------------------------------------------------- -->
                 <div class="row">
                     <div class="col">
                         <label for="txtCorreo">Correo</label>
-                        <input onblur="validarForm()" type="text" class="form-control" id="txtCorreo" placeholder="Ej: ejemplo@duocuc.cl">
-                        <small id="valCorreo">Debe ingresar correo</small>
-
+                        <input name="txtCorreo" id="txtCorreo" type="text" placeholder="Ej: ejemplo@duocuc.cl" class="form-control">
+                    </div>
+                </div>
+                <div class="row">
                         <div class="col-md-10">
                             <label for="txtContra">Contraseña</label>
-                            <input onblur="validarForm()" type="password" class="form-control" id="txtContra" placeholder="Ingrese contraseña">
+                            <input onblur="validarForm()"name="txtContra" type="password" class="form-control" id="txtContra" placeholder="Ingrese contraseña">
                             <small id="valContra">Debe ingresar contraseña</small>
                         </div>
                         <div class="col-md-2">
                             <button onclick="password()" class="btn btn-outline-secondary mt-4" type="button" id="button-addon2">
-                            
                                 <svg id="mostrar" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                     class="bi bi-eye-fill" viewBox="0 0 16 16">
                                     <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
@@ -53,17 +51,69 @@
                                 </svg>
                             </button>
                         </div>
-                    </div>
                 </div>
                 <button class="btn btn-dark mt-5 w-100">Iniciar sesion</button>
             </div>
-
         </form>
+        <div class="container mt-5">
+            <form style="font-size: 25px; display: flex; flex-direction: column; align-items: center;" action="/registrarse">
+                <label style="margin-bottom: 10px;" for="">¿No tienes una cuenta?</label>
+                <button class="btn btn-dark mt-5 w-50">Registrarse</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="toastErrorContra" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-emoji-dizzy" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                    <path d="M9.146 5.146a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708.708l-.647.646.647.646a.5.5 0 0 1-.708.708l-.646-.647-.646.647a.5.5 0 1 1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 0-.708zm-5 0a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 1 1 .708.708l-.647.646.647.646a.5.5 0 1 1-.708.708L5.5 7.207l-.646.647a.5.5 0 1 1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 0-.708zM10 11a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"/>
+                </svg>
+            </div>
+            <div class="toast-body">
+                Contraseña incorrecta...
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    </div>
+
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="toastErrorCorreo" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-emoji-dizzy" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                    <path d="M9.146 5.146a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708.708l-.647.646.647.646a.5.5 0 0 1-.708.708l-.646-.647-.646.647a.5.5 0 1 1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 0-.708zm-5 0a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 1 1 .708.708l-.647.646.647.646a.5.5 0 1 1-.708.708L5.5 7.207l-.646.647a.5.5 0 1 1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 0-.708zM10 11a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"/>
+                </svg>
+            </div>
+            <div class="toast-body">
+                El correo no esta registrado en el sistema...
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    </div>
+
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="toastError" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-emoji-dizzy"
+                    viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                    <path
+                        d="M9.146 5.146a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708.708l-.647.646.647.646a.5.5 0 0 1-.708.708l-.646-.647-.646.647a.5.5 0 1 1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 0-.708zm-5 0a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 1 1 .708.708l-.647.646.647.646a.5.5 0 1 1-.708.708L5.5 7.207l-.646.647a.5.5 0 1 1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 0-.708zM10 11a2 2 0 1 1-4 0 2 2 0 0 1 4 0z" />
+                </svg>
+            </div>
+            <div class="toast-body">
+                ¡Debe completar todos los campos!
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
     </div>
     
 {% endblock %}
 
 {% block script %}
+    <script src="{% static 'js/iniciarSesion.js' %}"></script>
     <script src="{% static 'js/formLogin.js' %}"></script>
     <script src="{% static 'js/productos.js' %}"></script>
     <script src="{% static 'js/carrito.js' %}"></script>

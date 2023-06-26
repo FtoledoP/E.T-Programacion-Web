@@ -30,18 +30,20 @@
             <div class="row mt-5">
                 <h2>Perros</h2>
                 {% for p in cate_perros %}
-                <div class="col">
-                    <div class="card" style="width: 18rem;">
-                        <div class="item">
-                            <span class="idProducto">SKU: {{p.sku}}</span>
-                            <span class="tituloProducto">{{p.nombre}}</span>
-                            <img src="{{p.imagen.url}}" class="imgProducto" alt="...">
-                            <span class="precioProducto">${{p.precio}}</span>
-                            <span class="descProducto">{{p.descripcion}}</span>
-                            <button class="btnProducto">Agregar al Carrito</button>
+                    {% if p.stock > 0 %}
+                        <div class="col">
+                            <div class="card" style="width: 18rem;">
+                                <div class="item">
+                                    <span class="idProducto">SKU: {{p.sku}}</span>
+                                    <span class="tituloProducto">{{p.nombre}}</span>
+                                    <img src="{{p.imagen.url}}" class="imgProducto" alt="...">
+                                    <span class="precioProducto">${{p.precio}}</span>
+                                    <span class="descProducto">{{p.descripcion}}</span>
+                                    <button class="btnProducto">Agregar al Carrito</button>
+                                </div>
+                                </div>
                         </div>
-                        </div>
-                </div>
+                    {%  endif %}
                 {% endfor %}
             </div>
         </div>

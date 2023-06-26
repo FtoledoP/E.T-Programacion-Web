@@ -1,17 +1,16 @@
-const formulario = document.getElementById("agregarUsuarioForm");
+const formulario = document.getElementById("iniciarSesionForm");
 const toastLiveExample = document.getElementById('toastError')
 const toastErrorCorreo = document.getElementById('toastErrorCorreo');
+const toastErrorContra = document.getElementById('toastErrorContra');
 
 formulario.addEventListener('submit', function(evento){
     evento.preventDefault();
     correo = document.getElementById("txtCorreo").value;
+    contra = document.getElementById("txtContra").value;
     errorCorreo = false
+    errorContra = false
 
-    if ((document.getElementById("txtNombre").value.length == 0) || 
-    (document.getElementById("txtCorreo").value.length == 0) || 
-    (document.getElementById("txtApe").value.length == 0) || 
-    (document.getElementById("txtContra").value.length == 0) ||
-    (document.getElementById("cmbTipo").value == "Seleccione")) {
+    if ((correo.length == 0) || (contra.length == 0)) {
         const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
         toastBootstrap.show()
 
@@ -31,17 +30,23 @@ formulario.addEventListener('submit', function(evento){
                     console.log(usuario);
                     if (!(usuario.correo == correo)) {
                     } else {
-                        const toastCorreo = bootstrap.Toast.getOrCreateInstance(toastErrorCorreo)
-                        toastCorreo.show()
-                        errorCorreo = true
-                        return;
+                        if (!(usuario.password == contra)){
+                            errorContra = true
+                            errorCorreo = true
+                        }else{
+                            errorCorreo = true
+                        }
                     }
                 });
-
                 if (errorCorreo == false) {
+                    const toastCorreo = bootstrap.Toast.getOrCreateInstance(toastErrorCorreo)
+                    toastCorreo.show()
+                }else if(errorContra == true){
+                    const toastContra = bootstrap.Toast.getOrCreateInstance(toastErrorContra)
+                    toastContra.show()
+                }else{
                     this.submit()
                 }
-
             })
             .catch(error => {
                 console.log(error);

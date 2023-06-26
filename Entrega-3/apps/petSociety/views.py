@@ -7,7 +7,6 @@ from django.core.exceptions import ValidationError
 
 # Create your views here.
 
-
 def cargarInicio(request):
      productos = Producto.objects.all()
      categoria_perros = Producto.objects.filter(id_categoria = 1)
@@ -59,7 +58,8 @@ def cargarLogin(request):
      return render(request,"login.html")
 
 def cargarRegistrarse(request):
-     return render(request,"registrarse.html")
+     tipoUser = TipoUsuario.objects.all()
+     return render(request,"registrarse.html",{"tipo":tipoUser})
 
 def cargarEditarProductos(request,sku):
     productos = Producto.objects.get(sku = sku)
@@ -108,9 +108,15 @@ def agregarUsuario(request):
      v_nombre = request.POST['txtNombre']
      v_aprellido = request.POST["txtApe"]
      v_contra = request.POST["txtContra"]
+     v_tipo = TipoUsuario.objects.get(id_tipo=request.POST['cmbTipo'])
 
 
 
-     Usuario.objects.create(correo = v_correo, nombre = v_nombre, apellido = v_aprellido, password = v_contra)        
+     Usuario.objects.create(correo = v_correo, nombre = v_nombre, apellido = v_aprellido, password = v_contra, id_tipo = v_tipo)      
 
      return redirect('/')
+
+def iniciarSesion(request):
+
+     return redirect('/')
+

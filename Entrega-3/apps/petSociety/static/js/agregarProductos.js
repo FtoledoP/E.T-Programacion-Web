@@ -22,16 +22,14 @@ formulario.forEach((form) => {
       fetch('/api/productos/')
       .then(response => response.json())
       .then(data => {
-        const productos = data; // Obtén la lista de productos existentes
+        const productos = data; 
         console.log(productos);
 
-        // Convertir la lista de productos en una lista temporal
         const listaTemporal = [];
         productos.forEach(producto => {
           listaTemporal.push(producto);
         });
 
-        // Recorrer la lista temporal
         listaTemporal.forEach(producto => {
           console.log(producto); 
           if (!(producto.sku == sku)){

@@ -10,6 +10,7 @@ import json
 
 def cargarInicio(request):
      tipoUsuario = request.session.get('tipoUsuario', None)
+     print(tipoUsuario)
      productos = Producto.objects.all()
      categoria_perros = Producto.objects.filter(id_categoria = 1)
      categoria_gatos = Producto.objects.filter(id_categoria = 2)
@@ -18,24 +19,28 @@ def cargarInicio(request):
 
 def cargarPerros(request):
      tipoUsuario = request.session.get('tipoUsuario', None)
+     print(tipoUsuario)
      productos = Producto.objects.all()
      categoria_perros = Producto.objects.filter(id_categoria = 1)
      return render(request,"perros.html",{"prod":productos,"cate_perros":categoria_perros,"tipoUsuario":tipoUsuario})
 
 def cargarGatos(request):
      tipoUsuario = request.session.get('tipoUsuario', None)
+     print(tipoUsuario)
      productos = Producto.objects.all()
      categoria_gatos = Producto.objects.filter(id_categoria = 2)
      return render(request,"gatos.html",{"prod":productos,"cate_gatos":categoria_gatos,"tipoUsuario":tipoUsuario})
 
 def cargarMas(request):
      tipoUsuario = request.session.get('tipoUsuario', None)
+     print(tipoUsuario)
      productos = Producto.objects.all()
      categoria_otros = Producto.objects.filter(id_categoria = 3)
      return render(request,"mas.html",{"prod":productos, "cate_otros":categoria_otros,"tipoUsuario":tipoUsuario})
 
 def cargarAgregarProductos(request):
      tipoUsuario = request.session.get('tipoUsuario', None)
+     print(tipoUsuario)
      categorias = Categoria.objects.all()
      productos = Producto.objects.all()
      return render(request,"agregarProductos.html",{"cate":categorias, "prod":productos,"tipoUsuario":tipoUsuario})
@@ -59,15 +64,18 @@ def agregarProductos(request):
 
 def cargarLogin(request):
      tipoUsuario = request.session.get('tipoUsuario', None)
+     print(tipoUsuario)
      return render(request,"login.html",{"tipoUsuario":tipoUsuario})
 
 def cargarRegistrarse(request):
      tipoUsuario = request.session.get('tipoUsuario', None)
+     print(tipoUsuario)
      tipoUser = TipoUsuario.objects.all()
      return render(request,"registrarse.html",{"tipo":tipoUser,"tipoUsuario":tipoUsuario})
 
 def cargarEditarProductos(request,sku):
      tipoUsuario = request.session.get('tipoUsuario', None)
+     print(tipoUsuario)
      productos = Producto.objects.get(sku = sku)
      categorias = Categoria.objects.all()
      return render(request,"editarProductos.html",{"prod":productos,"cate":categorias,"tipoUsuario":tipoUsuario})
@@ -119,7 +127,6 @@ def agregarUsuario(request):
 
 
      Usuario.objects.create(correo = v_correo, nombre = v_nombre, apellido = v_aprellido, password = v_contra, id_tipo = v_tipo)      
-
      return redirect('/')
 
 def iniciarSesion(request):
@@ -148,6 +155,11 @@ def cerrarSesion(request):
      return redirect('/login')
 
 def actualizarStock(request):
+     tipoUsuario = request.session.get('tipoUsuario', None)
+     if tipoUsuario is None:
+          print("Usuario no logueado")
+          return redirect('/login') # Interrumpir la ejecución de la función
+
      if request.method == 'POST':
           carrito = request.POST.get('carrito')
           # Procesar el carrito y actualizar el stock de los productos
@@ -161,5 +173,6 @@ def actualizarStock(request):
                producto.save()
 
           return redirect('/')
+
 
 

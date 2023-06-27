@@ -1,7 +1,8 @@
 const toastErrorCarrito = document.getElementById('toastError');
 // Obtener referencia al botón "Agregar al Carrito"
 var agregarBotones = document.querySelectorAll('.btnProducto');
-formulario = document.getElementById("comprarCarrito")
+var modal = document.getElementById('modalAgregar');
+const closeButton = modal.querySelector('.btn');
 
 // Agregar un evento de clic a cada botón
 agregarBotones.forEach(function(boton) {
@@ -25,8 +26,6 @@ agregarBotones.forEach(function(boton) {
     var carrito = JSON.parse(localStorage.getItem('carrito')) || [];
     const existe = carrito.some((item) => item.id === producto.id);
     if (existe) {
-      const toastErrorCarritoInstance = bootstrap.Toast.getOrCreateInstance(toastErrorCarrito);
-      toastErrorCarritoInstance.show();
     } else {
       // Agregar el producto al carrito
       carrito.push(producto);
@@ -35,7 +34,11 @@ agregarBotones.forEach(function(boton) {
       localStorage.setItem('carrito', JSON.stringify(carrito));
 
       // Actualizar visualmente el carrito
-      actualizarCarrito();
+      var modalInstance = new bootstrap.Modal(modal);
+      modalInstance.show();
+      closeButton.addEventListener('click', function() {
+        actualizarCarrito();
+      });
     }
   });
 });

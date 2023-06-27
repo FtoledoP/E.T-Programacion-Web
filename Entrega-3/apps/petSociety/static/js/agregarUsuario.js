@@ -1,6 +1,8 @@
 const formulario = document.getElementById("agregarUsuarioForm");
 const toastLiveExample = document.getElementById('toastError')
 const toastErrorCorreo = document.getElementById('toastErrorCorreo');
+var modal = document.getElementById('exampleModal');
+const closeButton = modal.querySelector('.btn');
 
 formulario.addEventListener('submit', function(evento){
     evento.preventDefault();
@@ -40,7 +42,11 @@ formulario.addEventListener('submit', function(evento){
                 });
 
                 if (errorCorreo == false) {
-                    this.submit()
+                    var modalInstance = new bootstrap.Modal(modal);
+                    modalInstance.show();
+                    closeButton.addEventListener('click', function() {
+                        formulario.submit();
+                    });
                 }
 
             })

@@ -32,7 +32,7 @@
                 <div class="row">
                         <div class="col-md-10">
                             <label for="txtContra">Contraseña</label>
-                            <input onblur="validarForm()"name="txtContra" type="password" class="form-control" id="txtContra" placeholder="Ingrese contraseña">
+                            <input name="txtContra" type="password" class="form-control" id="txtContra" placeholder="Ingrese contraseña">
                             <small id="valContra">Debe ingresar contraseña</small>
                         </div>
                         <div class="col-md-2">
@@ -114,7 +114,6 @@
 
 {% block script %}
     <script src="{% static 'js/iniciarSesion.js' %}"></script>
-    <script src="{% static 'js/formLogin.js' %}"></script>
     <script src="{% static 'js/productos.js' %}"></script>
     <script src="{% static 'js/carrito.js' %}"></script>
     <script src="{% static 'js/reloj.js' %}"></script>

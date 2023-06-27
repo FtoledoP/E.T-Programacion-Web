@@ -1,6 +1,7 @@
 const toastErrorCarrito = document.getElementById('toastError');
 // Obtener referencia al botón "Agregar al Carrito"
 var agregarBotones = document.querySelectorAll('.btnProducto');
+formulario = document.getElementById("comprarCarrito")
 
 // Agregar un evento de clic a cada botón
 agregarBotones.forEach(function(boton) {
@@ -22,30 +23,26 @@ agregarBotones.forEach(function(boton) {
 
     // Obtener el carrito del localStorage o crear uno vacío
     var carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-    const existe = carrito.some((item) => item.id === producto.idProducto);
-                if (existe) {
-                    const toastErrorCarrito = bootstrap.Toast.getOrCreateInstance(toastErrorCarrito)
-                    toastErrorCarrito.show()
-                } else {
-                    
+    const existe = carrito.some((item) => item.id === producto.id);
+    if (existe) {
+      const toastErrorCarritoInstance = bootstrap.Toast.getOrCreateInstance(toastErrorCarrito);
+      toastErrorCarritoInstance.show();
+    } else {
+      // Agregar el producto al carrito
+      carrito.push(producto);
 
-                    // Agregar el producto al carrito
-                    carrito.push(producto);
+      // Guardar el carrito actualizado en el localStorage
+      localStorage.setItem('carrito', JSON.stringify(carrito));
 
-                    // Guardar el carrito actualizado en el localStorage
-                    localStorage.setItem('carrito', JSON.stringify(carrito));
-
-
-                    // Actualizar visualmente el carrito
-                    actualizarCarrito();
-                }
+      // Actualizar visualmente el carrito
+      actualizarCarrito();
+    }
   });
 });
 
 // Función para actualizar visualmente el carrito
 function actualizarCarrito() {
   var carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-
   var insertar = document.querySelector('.containerCarrito');
   insertar.innerHTML = '';
 
@@ -61,37 +58,46 @@ function actualizarCarrito() {
     insertar.append(contenido);
     //Boton para eliminar del carrito
 
-    let eliminar = document.createElement("button")
-    eliminar.innerText = "Eliminar ❌"
-    eliminar.className = "btnProducto"
+    let eliminar = document.createElement("button");
+    eliminar.innerText = "Eliminar ❌";
+    eliminar.className = "btnProducto";
 
-    contenido.append(eliminar)
+    contenido.append(eliminar);
 
     eliminar.addEventListener("click", function() {
-        eliminarItem(producto.id);
+      eliminarItem(producto.id);
     });
   });
+
+  var carritoInput = document.getElementById('carritoInput');
+  carritoInput.value = JSON.stringify(carrito);
 }
 
-function eliminarItem(id){
-    var carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-    carrito.splice(carrito.findIndex(car => car.id === id), 1)
+function eliminarItem(id) {
+  var carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+  carrito.splice(carrito.findIndex(car => car.id === id), 1);
 
-    let valor = id;
-    let obj = JSON.parse(localStorage.getItem("carrito"));
-    console.log("STORAGE", obj);
-    let arrayTemporal = [];
+  let valor = id;
+  let obj = JSON.parse(localStorage.getItem("carrito"));
+  console.log("STORAGE", obj);
+  let arrayTemporal = [];
 
-    for (const i of obj) {
-        if (i.id != valor) {
-            arrayTemporal.push(i);
-        }
+  for (const i of obj) {
+    if (i.id != valor) {
+      arrayTemporal.push(i);
     }
-    localStorage.setItem("carrito", JSON.stringify(arrayTemporal));
-    actualizarCarrito()
-    console.log(carrito);
+  }
+  localStorage.setItem("carrito", JSON.stringify(arrayTemporal));
+  actualizarCarrito();
+  console.log(carrito);
 }
 
+function vaciarCarrito() {
+  localStorage.removeItem('carrito');
+}
 
+const comprarBtn = document.getElementById('comprarBtn');
 
-
+comprarBtn.addEventListener('click', function() {
+  vaciarCarrito();
+});

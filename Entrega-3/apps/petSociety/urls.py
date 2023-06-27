@@ -15,7 +15,8 @@ urlpatterns = [
     path('editarProductosForm',views.editarProductos),
     path('eliminarProductos/<sku>',views.eliminarProductos),
     path('iniciarSesionForm',views.iniciarSesion),
-    path('cerrarSesion',views.cerrarSesion)
+    path('cerrarSesion',views.cerrarSesion),
+    path('actualizarStock',views.actualizarStock)
 ]
 
 

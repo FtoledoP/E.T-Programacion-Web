@@ -111,6 +111,12 @@
             <div class="containerCarrito">
             </div>
         </div>
+        <div class="off-canvas-footer" id="off-canvas-footer">
+            <form id="comprarCarrito" method="POST" action="/actualizarStock">{% csrf_token %}
+                <input type="hidden" name="carrito" id="carritoInput">
+                <button type="submit" id="comprarBtn">Comprar</button>
+            </form>
+        </div>
     </div>
     </div>
 

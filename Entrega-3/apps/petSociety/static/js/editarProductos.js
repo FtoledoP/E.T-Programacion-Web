@@ -11,8 +11,7 @@ formulario.addEventListener("submit", function (evento) {
     (document.getElementById("txtStock").value.length === 0) || 
     (document.getElementById("txtPrecio").value.length === 0) || 
     (document.getElementById("txtDescripcion").value.length === 0) ||
-    (document.getElementById("cmbCategoria").value === "Seleccione") ||
-    (document.getElementById("txtImg").value.length === 0)) {
+    (document.getElementById("cmbCategoria").value === "Seleccione")) {
         camposCompletos = false;
         const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
         toastBootstrap.show()

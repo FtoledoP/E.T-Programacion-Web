@@ -48,12 +48,12 @@
 <!-- perros -->
     <div class="container">
         <h2>Perros</h2>
-        <div class="containerProductos">
+        <div class="containerProductos mb-5">
             <div class="row mt-5">
                 {% for p in cate_perros %}
                     {% if p.stock > 0 %}
                         <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                            <div class="card" style="width: 18rem;">
+                            <div class="cardProducto" style="width: 18rem;">
                                 <div class="item">
                                     <span class="idProducto">{{p.sku}}</span>
                                     <span class="tituloProducto">{{p.nombre}}</span>
@@ -76,7 +76,7 @@
                 {% for p in cate_gatos %}
                     {% if p.stock > 0 %}
                         <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                            <div class="card" style="width: 18rem;">
+                            <div class="cardProducto" style="width: 18rem;">
                                 <div class="item">
                                     <span class="idProducto">{{p.sku}}</span>
                                     <span class="tituloProducto">{{p.nombre}}</span>

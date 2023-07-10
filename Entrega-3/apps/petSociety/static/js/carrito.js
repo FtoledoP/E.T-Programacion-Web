@@ -19,16 +19,31 @@ agregarBotones.forEach(function(boton) {
       id: id,
       titulo: titulo,
       imgSrc: imgSrc,
-      precio: precio
+      precio: precio,
+      cantidad: 1
     };
 
     // Obtener el carrito del localStorage o crear uno vacío
     var carrito = JSON.parse(localStorage.getItem('carrito')) || [];
     const existe = carrito.some((item) => item.id === producto.id);
     if (existe) {
+      // Agregar el producto al carrito
+      carrito.push(producto);
+      console.log(carrito);
+
+      // Guardar el carrito actualizado en el localStorage
+      localStorage.setItem('carrito', JSON.stringify(carrito));
+
+      // Actualizar visualmente el carrito
+      var modalInstance = new bootstrap.Modal(modal);
+      modalInstance.show();
+      closeButton.addEventListener('click', function() {
+        actualizarCarrito();
+      });
     } else {
       // Agregar el producto al carrito
       carrito.push(producto);
+      console.log(carrito);
 
       // Guardar el carrito actualizado en el localStorage
       localStorage.setItem('carrito', JSON.stringify(carrito));

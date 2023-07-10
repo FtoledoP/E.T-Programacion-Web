@@ -79,68 +79,108 @@
     <div class="container mt-5">
         <table class="table">
             <thead>
-              <tr>
-                <th scope="col">sku</th>
-                <th scope="col">Imagen</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Stock</th>
-                <th scope="col">Precio</th>
-                <th scope="col">Descripción</th>
-                <th scope="col">Categoria</th>
-                <th scope="col">Opciones</th>
-              </tr>
+                <tr>
+                    <th scope="col">sku</th>
+                    <th scope="col">Imagen</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Stock</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Descripción</th>
+                    <th scope="col">Categoria</th>
+                    <th scope="col">Opciones</th>
+                </tr>
             </thead>
             <tbody>
                 {% for p in prod %}
-              <tr>
-                <th scope="row">{{p.sku}}</th>
-                <td><img src="{{p.imagen.url}}" alt="" height="100"></td>
-                <td>{{p.nombre}}</td>
-                <td>{{p.stock}}</td>
-                <td>{{p.precio}}</td>
-                <td>{{p.descripcion}}</td>
-                <td>{{p.id_categoria}}</td>
-                <td><a href="/editarProductos/{{p.sku}}" class="btn btn-primary">Editar</a></td>
-                <td><a href="/eliminarProductos/{{p.sku}}" class="btn btn-danger">Eliminar</a></td>
-              </tr>
-              {% endfor %} 
+                <tr>
+                    <th scope="row">{{p.sku}}</th>
+                    <td><img src="{{p.imagen.url}}" alt="" height="100"></td>
+                    <td>{{p.nombre}}</td>
+                    <td>{{p.stock}}</td>
+                    <td>{{p.precio}}</td>
+                    <td>{{p.descripcion}}</td>
+                    <td>{{p.id_categoria}}</td>
+                    <td><a href="/editarProductos/{{p.sku}}" class="btn btn-primary">Editar</a></td>
+                    <td>
+                        <form action="/eliminarProductos/{{ p.sku }}" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
             </tbody>
-          </table>
+        </table>
     </div>
 
     <div class="toast-container position-fixed bottom-0 end-0 p-3">
-      <div id="toastErrorSku" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-          <div class="toast-header">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-emoji-dizzy" viewBox="0 0 16 16">
-                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                  <path d="M9.146 5.146a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708.708l-.647.646.647.646a.5.5 0 0 1-.708.708l-.646-.647-.646.647a.5.5 0 1 1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 0-.708zm-5 0a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 1 1 .708.708l-.647.646.647.646a.5.5 0 1 1-.708.708L5.5 7.207l-.646.647a.5.5 0 1 1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 0-.708zM10 11a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"/>
-              </svg>
-          </div>
-          <div class="toast-body">
-              El SKU ingresado ya existe en la tienda...
-          </div>
-          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-      </div>
-  </div>
-  
-
-
-    <div class="toast-container position-fixed bottom-0 end-0 p-3">
-      
-        <div id="toastError" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-          <div class="toast-header">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-emoji-dizzy" viewBox="0 0 16 16">
-                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                  <path d="M9.146 5.146a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708.708l-.647.646.647.646a.5.5 0 0 1-.708.708l-.646-.647-.646.647a.5.5 0 1 1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 0-.708zm-5 0a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 1 1 .708.708l-.647.646.647.646a.5.5 0 1 1-.708.708L5.5 7.207l-.646.647a.5.5 0 1 1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 0-.708zM10 11a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"/>
+        <div id="toastErrorSku" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-emoji-dizzy"
+                    viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                    <path
+                        d="M9.146 5.146a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708.708l-.647.646.647.646a.5.5 0 0 1-.708.708l-.646-.647-.646.647a.5.5 0 1 1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 0-.708zm-5 0a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 1 1 .708.708l-.647.646.647.646a.5.5 0 1 1-.708.708L5.5 7.207l-.646.647a.5.5 0 1 1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 0-.708zM10 11a2 2 0 1 1-4 0 2 2 0 0 1 4 0z" />
                 </svg>
-          </div>
-          <div class="toast-body">
-            ¡Debe completar todos los campos!
-          </div>
-          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                El SKU ingresado ya existe en la tienda...
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
-      </div>
-      
+    </div>
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+
+    <div id="toastError" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-emoji-dizzy"
+                viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                <path
+                    d="M9.146 5.146a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708.708l-.647.646.647.646a.5.5 0 0 1-.708.708l-.646-.647-.646.647a.5.5 0 1 1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 0-.708zm-5 0a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 1 1 .708.708l-.647.646.647.646a.5.5 0 1 1-.708.708L5.5 7.207l-.646.647a.5.5 0 1 1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 0-.708zM10 11a2 2 0 1 1-4 0 2 2 0 0 1 4 0z" />
+            </svg>
+        </div>
+        <div class="toast-body">
+            ¡Debe completar todos los campos!
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+</div>
+
+<!-- <div class="toast-container position-fixed bottom-0 end-0 p-3">
+
+    <div id="toastEliminar" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-emoji-dizzy"
+                viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                <path
+                    d="M9.146 5.146a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708.708l-.647.646.647.646a.5.5 0 0 1-.708.708l-.646-.647-.646.647a.5.5 0 1 1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 0-.708zm-5 0a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 1 1 .708.708l-.647.646.647.646a.5.5 0 1 1-.708.708L5.5 7.207l-.646.647a.5.5 0 1 1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 0-.708zM10 11a2 2 0 1 1-4 0 2 2 0 0 1 4 0z" />
+            </svg>
+        </div>
+        <div class="toast-body">
+            ¡Producto eliminado!
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+</div> -->
+
+<div id="modalEliminar" class="modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Carrito</h5>
+            </div>
+            <div class="modal-body">
+                <p>¡Producto eliminado!</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
 
 {% block script %}

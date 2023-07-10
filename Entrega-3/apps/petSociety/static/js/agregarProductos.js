@@ -1,6 +1,10 @@
 const formulario = document.querySelectorAll("#agregarProductoForm");
+const formularioEliminar = document.querySelectorAll("#eliminarProducto");
 const toastLiveExample = document.getElementById('toastError');
 const toastErrorSku = document.getElementById('toastErrorSku');
+const toastEliminar = document.getElementById("toastEliminar");
+var modalEliminar = document.getElementById('modalEliminar');
+//const closeButton = modalEliminar.querySelector('.btn');
 
 formulario.forEach((form) => {
   form.addEventListener("submit", function (evento) {
@@ -50,5 +54,22 @@ formulario.forEach((form) => {
         console.log(error);
       });
     }
+  });
+});
+
+formularioEliminar.forEach((form) => {
+  form.addEventListener("submit", function (evento) {
+    evento.preventDefault();
+    var modalInstance = new bootstrap.Modal(modalEliminar);
+    modalInstance.show();
+
+
+    var currentForm = this;
+
+
+    closeButton.addEventListener("click", function () {
+
+      currentForm.submit();
+    });
   });
 });

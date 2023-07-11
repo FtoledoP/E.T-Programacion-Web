@@ -2,7 +2,7 @@ const toastErrorCarrito = document.getElementById('toastError');
 // Obtener referencia al botón "Agregar al Carrito"
 var agregarBotones = document.querySelectorAll('.btnProducto');
 var modal = document.getElementById('modalAgregar');
-const closeButton = modal.querySelector('.btn');
+const cerrarButton = modal.querySelector('.btn');
 
 // Agregar un evento de clic a cada botón
 agregarBotones.forEach(function(boton) {
@@ -26,7 +26,6 @@ agregarBotones.forEach(function(boton) {
     // Obtener el carrito del localStorage o crear uno vacío
     var carrito = JSON.parse(localStorage.getItem('carrito')) || [];
     const existe = carrito.some((item) => item.id === producto.id);
-    if (existe) {
       // Agregar el producto al carrito
       carrito.push(producto);
       console.log(carrito);
@@ -37,24 +36,9 @@ agregarBotones.forEach(function(boton) {
       // Actualizar visualmente el carrito
       var modalInstance = new bootstrap.Modal(modal);
       modalInstance.show();
-      closeButton.addEventListener('click', function() {
+      cerrarButton.addEventListener('click', function() {
         actualizarCarrito();
       });
-    } else {
-      // Agregar el producto al carrito
-      carrito.push(producto);
-      console.log(carrito);
-
-      // Guardar el carrito actualizado en el localStorage
-      localStorage.setItem('carrito', JSON.stringify(carrito));
-
-      // Actualizar visualmente el carrito
-      var modalInstance = new bootstrap.Modal(modal);
-      modalInstance.show();
-      closeButton.addEventListener('click', function() {
-        actualizarCarrito();
-      });
-    }
   });
 });
 

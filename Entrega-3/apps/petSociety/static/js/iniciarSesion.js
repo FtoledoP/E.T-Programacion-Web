@@ -2,6 +2,7 @@ const formulario = document.getElementById("iniciarSesionForm");
 const toastLiveExample = document.getElementById('toastError')
 const toastErrorCorreo = document.getElementById('toastErrorCorreo');
 const toastErrorContra = document.getElementById('toastErrorContra');
+document.getElementById("ocultar").style.display = "none";
 
 formulario.addEventListener('submit', function(evento){
     evento.preventDefault();
@@ -55,3 +56,17 @@ formulario.addEventListener('submit', function(evento){
 
 
 })
+
+function password(){
+    let input = document.getElementById("txtContra");
+
+    if (input.type == "password") {
+        input.type = "text";
+        document.getElementById("ocultar").style.display = "inline";
+        document.getElementById("mostrar").style.display = "none";
+    }else{
+        input.type = "password";
+        document.getElementById("ocultar").style.display = "none";
+        document.getElementById("mostrar").style.display = "inline";
+    }
+}
